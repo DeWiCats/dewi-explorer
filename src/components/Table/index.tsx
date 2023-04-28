@@ -124,12 +124,11 @@ export default function CustomizedTables() {
       sx={{
         width: "100%",
         overflow: "hidden",
-        maxHeight: 760,
+        maxHeight: 720,
         borderRadius: theme.spacing(2),
       }}
     >
-      <TableContainer sx={{ maxHeight: 760, height: "100%" }}>
-        <TableToolbar />
+      <TableContainer sx={{ maxHeight: 720, minHeight: 700, height: "100%" }}>
         {fetchingDelegateStakes ? (
           <Box
             sx={{
@@ -142,48 +141,57 @@ export default function CustomizedTables() {
             <CircularProgress thickness={4} size={40} sx={{ color: "white" }} />
           </Box>
         ) : (
-          <Table stickyHeader sx={{ minWidth: 700 }}>
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <StyledTableCell key={column.header} align={column.align}>
-                    {column.header}
-                  </StyledTableCell>
+          <>
+            <TableToolbar />
+            <Table stickyHeader sx={{ minWidth: 700 }}>
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <StyledTableCell key={column.header} align={column.align}>
+                      {column.header}
+                    </StyledTableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <StyledTableRow key={row.delegated_position_key}>
+                    <StyledTableCell component="th" scope="row">
+                      {row.delegated_position_key}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.duration_s}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.end_ts}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.hnt_amount}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.last_claimed_epoch}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.lockup_type}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.position_key}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.purged}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.start_ts}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.sub_dao}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">{row.vehnt}</StyledTableCell>
+                  </StyledTableRow>
                 ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.delegated_position_key}>
-                  <StyledTableCell component="th" scope="row">
-                    {row.delegated_position_key}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.duration_s}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">{row.end_ts}</StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.hnt_amount}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.last_claimed_epoch}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.lockup_type}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.position_key}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">{row.purged}</StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.start_ts}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">{row.sub_dao}</StyledTableCell>
-                  <StyledTableCell align="right">{row.vehnt}</StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableBody>
+            </Table>
+          </>
         )}
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
