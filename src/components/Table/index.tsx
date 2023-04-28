@@ -8,7 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useTheme } from "@mui/material/styles";
-import { TablePagination } from "@mui/material";
+import { Box, CircularProgress, TablePagination } from "@mui/material";
 import useHeliumSolana, { Position } from "@/hooks/useHeliumSolana";
 import TableToolbar from "./Toolbar";
 
@@ -36,7 +36,8 @@ export default function CustomizedTables() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const theme = useTheme();
-  const { delegatedStakes, fetchMoreDelegatedStakes } = useHeliumSolana();
+  const { delegatedStakes, fetchMoreDelegatedStakes, fetchingDelegateStakes } =
+    useHeliumSolana();
 
   const columns = useMemo(() => {
     return [
@@ -127,58 +128,73 @@ export default function CustomizedTables() {
         borderRadius: theme.spacing(2),
       }}
     >
-      <TableContainer sx={{ maxHeight: 700 }}>
+      <TableContainer sx={{ maxHeight: 760, height: "100%" }}>
         <TableToolbar />
-        <Table stickyHeader sx={{ minWidth: 700 }}>
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <StyledTableCell key={column.header} align={column.align}>
-                  {column.header}
-                </StyledTableCell>
+        {fetchingDelegateStakes ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+            }}
+          >
+            <CircularProgress thickness={4} size={40} sx={{ color: "white" }} />
+          </Box>
+        ) : (
+          <Table stickyHeader sx={{ minWidth: 700 }}>
+            <TableHead>
+              <TableRow>
+                {columns.map((column) => (
+                  <StyledTableCell key={column.header} align={column.align}>
+                    {column.header}
+                  </StyledTableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <StyledTableRow key={row.delegated_position_key}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.delegated_position_key}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {row.duration_s}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{row.end_ts}</StyledTableCell>
+                  <StyledTableCell align="right">
+                    {row.hnt_amount}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {row.last_claimed_epoch}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {row.lockup_type}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {row.position_key}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{row.purged}</StyledTableCell>
+                  <StyledTableCell align="right">
+                    {row.start_ts}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{row.sub_dao}</StyledTableCell>
+                  <StyledTableCell align="right">{row.vehnt}</StyledTableCell>
+                </StyledTableRow>
               ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.delegated_position_key}>
-                <StyledTableCell component="th" scope="row">
-                  {row.delegated_position_key}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  {row.duration_s}
-                </StyledTableCell>
-                <StyledTableCell align="right">{row.end_ts}</StyledTableCell>
-                <StyledTableCell align="right">
-                  {row.hnt_amount}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  {row.last_claimed_epoch}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  {row.lockup_type}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  {row.position_key}
-                </StyledTableCell>
-                <StyledTableCell align="right">{row.purged}</StyledTableCell>
-                <StyledTableCell align="right">{row.start_ts}</StyledTableCell>
-                <StyledTableCell align="right">{row.sub_dao}</StyledTableCell>
-                <StyledTableCell align="right">{row.vehnt}</StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableBody>
+          </Table>
+        )}
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={data.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={data.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </Paper>
   );
 }

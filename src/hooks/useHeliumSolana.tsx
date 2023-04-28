@@ -73,6 +73,7 @@ export type DelegatedStakes = {
 
 const useHeliumSolana = () => {
   const [epochs, setEpochs] = useState<epochInfo[]>([]);
+  const [fetchingDelegateStakes, setFetchingDelegateStakes] = useState(false);
   const [delegatedStakes, setDelegatedStakes] = useState<Position[]>([]);
   const [currentTimestamp, setCurrentTimestamp] = useState<
     string | undefined
@@ -115,7 +116,9 @@ const useHeliumSolana = () => {
   useAsync(async () => {
     const fetchedEpochs = await fetchEpochs();
     setEpochs(fetchedEpochs);
+    setFetchingDelegateStakes(true);
     const fetchedDelegatedStakes = await fetchDelegatedStakes();
+    setFetchingDelegateStakes(false);
     setDelegatedStakes(fetchedDelegatedStakes);
   }, []);
 
@@ -127,6 +130,7 @@ const useHeliumSolana = () => {
     fetchMoreDelegatedStakes,
     epochs,
     delegatedStakes,
+    fetchingDelegateStakes,
   };
 };
 

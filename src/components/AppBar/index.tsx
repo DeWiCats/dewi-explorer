@@ -19,23 +19,22 @@ function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
+
+  const handleNavMenuClick = React.useCallback(
+    (event: React.MouseEvent<HTMLElement>) => {
+      // Open www.dewicats.com url with new tab
+      window.open("https://www.dewicats.xyz/", "_blank");
+      handleCloseNavMenu();
+    },
+    []
+  );
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -118,7 +117,7 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={handleNavMenuClick}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -142,7 +141,7 @@ function ResponsiveAppBar() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={handleNavMenuClick}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}
