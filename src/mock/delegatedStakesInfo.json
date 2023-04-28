@@ -1,0 +1,54 @@
+{
+  "iot": {
+    "stats": {
+      "avg_hnt": 124528866409,
+      "avg_lockup": 72842121,
+      "avg_vehnt": 16620563151097,
+      "median_hnt": 5697768978,
+      "median_lockup": 63072000,
+      "median_vehnt": 749460699676
+    },
+    "total": {
+      "count": 4831,
+      "fall_rate": 617136092,
+      "hnt": 601598953622579,
+      "lockup": 0,
+      "vehnt": 80293940582951067
+    }
+  },
+  "mobile": {
+    "stats": {
+      "avg_hnt": 311093357629,
+      "avg_lockup": 75193678,
+      "avg_vehnt": 27871968206264,
+      "median_hnt": 6997154695,
+      "median_lockup": 63072000,
+      "median_vehnt": 955417500000
+    },
+    "total": {
+      "count": 1928,
+      "fall_rate": 537104913,
+      "hnt": 599787993509883,
+      "lockup": 0,
+      "vehnt": 53737154701677372
+    }
+  },
+  "network": {
+    "stats": {
+      "avg_hnt": 177746256418,
+      "avg_lockup": 73512901,
+      "avg_vehnt": 19830018535971,
+      "median_hnt": 6000000000,
+      "median_lockup": 63072000,
+      "median_vehnt": 750000000000
+    },
+    "total": {
+      "count": 6759,
+      "fall_rate": 1154241005,
+      "hnt": 1201386947132462,
+      "lockup": 0,
+      "vehnt": 134031095284628439
+    }
+  },
+  "timestamp": 1682629376
+}
