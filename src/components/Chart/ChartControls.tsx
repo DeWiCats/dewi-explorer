@@ -187,7 +187,7 @@ export default function ChartControls({ children }: ControlsProps) {
       }
       return (
         <text dx="-0.75em" dy="0.25em" fontSize={14} {...handlers}>
-          🍍
+          🎈
         </text>
       );
     },
@@ -245,7 +245,7 @@ export default function ChartControls({ children }: ControlsProps) {
       }
       return (
         <text x={x} y={y} dx="-0.75em" dy="0.25em" fontSize={14} {...handlers}>
-          {isNearestDatum ? "🍍" : "🍌"}
+          {isNearestDatum ? "🎈" : "🐱"}
         </text>
       );
     },
