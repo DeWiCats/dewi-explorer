@@ -11,6 +11,7 @@ import { useTheme } from "@mui/material/styles";
 import { Box, CircularProgress, TablePagination } from "@mui/material";
 import useHeliumSolana, { Position } from "@/hooks/useHeliumSolana";
 import TableToolbar from "./Toolbar";
+import { toNumber } from "@helium/spl-utils";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -157,7 +158,16 @@ export default function CustomizedTables() {
                 {rows.map((row) => (
                   <StyledTableRow key={row.delegated_position_key}>
                     <StyledTableCell component="th" scope="row">
-                      {row.delegated_position_key}
+                      <a
+                        style={{
+                          color: "white",
+                          textDecoration: "underline",
+                        }}
+                        target="_blank"
+                        href={`https://explorer.solana.com/address/${row.delegated_position_key}`}
+                      >
+                        {row.delegated_position_key}
+                      </a>
                     </StyledTableCell>
                     <StyledTableCell align="right">
                       {row.duration_s}
@@ -175,7 +185,16 @@ export default function CustomizedTables() {
                       {row.lockup_type}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {row.position_key}
+                      <a
+                        style={{
+                          color: "white",
+                          textDecoration: "underline",
+                        }}
+                        target="_blank"
+                        href={`https://explorer.solana.com/address/${row.position_key}`}
+                      >
+                        {row.position_key}
+                      </a>
                     </StyledTableCell>
                     <StyledTableCell align="right">
                       {row.purged}
@@ -186,7 +205,9 @@ export default function CustomizedTables() {
                     <StyledTableCell align="right">
                       {row.sub_dao}
                     </StyledTableCell>
-                    <StyledTableCell align="right">{row.vehnt}</StyledTableCell>
+                    <StyledTableCell align="right">
+                      {toNumber(BigInt(row.vehnt), 8).toLocaleString()}
+                    </StyledTableCell>
                   </StyledTableRow>
                 ))}
               </TableBody>
