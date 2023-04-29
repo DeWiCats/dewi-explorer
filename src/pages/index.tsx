@@ -26,6 +26,7 @@ const TabWrapper = styled(Box)(({ theme }) => ({
 }));
 
 const Title = styled(Typography)(({ theme }) => ({
+  color: "white",
   margin: theme.spacing(4),
 }));
 

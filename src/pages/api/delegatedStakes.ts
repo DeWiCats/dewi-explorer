@@ -37,14 +37,10 @@ export default async function handler(
       baseUrl = `${baseUrl}${getParameters}`;
     }
 
-    console.log("baseUrl", baseUrl);
-
     const delegatedStakes = await axios(baseUrl);
-
     const { data } = delegatedStakes;
     res.status(200).json(data);
   } catch (error) {
-    console.log("error", error);
     const { data } = get(error as any, "response", {});
     return res.status(500).json(data);
   }
