@@ -148,6 +148,20 @@ function ResponsiveAppBar() {
                 </MenuItem>
               </Menu>
             </Box>
+            <Button
+              onClick={toggleDialog}
+              sx={{
+                my: 2,
+                color: "white",
+                display: { xs: "flex", md: "none" },
+                justifyContent: "center",
+                alignItems: "center",
+                gap: theme.spacing(1),
+              }}
+            >
+              <Favorite />
+              Donate
+            </Button>
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <Image
                 src="/images/dewiLogo.png"
