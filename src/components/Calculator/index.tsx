@@ -427,7 +427,7 @@ const RewardCalculator = () => {
     if (!emission) return;
     subDAOEmissions = Number(emission.emissionsPerEpoch.replace(/,/g, ""));
     const estimatedReward =
-      (Number(yourVeHNTWithMult) / currentVeHNT) * subDAOEmissions;
+      (Number(yourVeHNTWithMult) / currentVeHNT) * (subDAOEmissions * 0.06);
     setEstimatedRewards(estimatedReward);
     setCalculated(true);
     setLoading(false);
