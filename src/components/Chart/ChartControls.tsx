@@ -359,6 +359,7 @@ export default function ChartControls({ children }: ControlsProps) {
           position: "absolute",
           top: 0,
           right: 0,
+          zIndex: 1038,
         }}
       >
         <EditIcon />

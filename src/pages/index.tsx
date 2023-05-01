@@ -9,6 +9,7 @@ import { use, useCallback, useMemo, useState } from "react";
 import { Box, Fade, Typography, styled } from "@mui/material";
 import DewiToggleButtonGroup from "@/components/ToggleButtonGroup";
 import useHeliumSolana from "@/hooks/useHeliumSolana";
+import DelegatedStakesInfoTable from "@/components/DelegatedStakesInfoTable";
 const inter = Inter({ subsets: ["latin"] });
 
 const Chart = dynamic(() => import("@/components/Chart"), { ssr: false });
@@ -101,8 +102,13 @@ export default function Home() {
           )}
           {selectedToggle === "charts" && (
             <Fade in timeout={1000}>
-              <TabWrapper>
+              <TabWrapper
+                sx={{
+                  flexDirection: "column",
+                }}
+              >
                 <Chart height={height} width={400} />
+                <DelegatedStakesInfoTable />
               </TabWrapper>
             </Fade>
           )}

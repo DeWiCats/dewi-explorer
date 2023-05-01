@@ -18,7 +18,7 @@ export type epochInfo = {
   mobile_vehnt_in_closing_positions: number;
 };
 
-type Stats = {
+export type Stats = {
   avg_hnt: number;
   avg_lockup: number;
   avg_vehnt: number;
@@ -27,7 +27,7 @@ type Stats = {
   median_vehnt: number;
 };
 
-type Total = {
+export type Total = {
   count: number;
   fall_rate: number;
   hnt: number;
@@ -35,19 +35,10 @@ type Total = {
   vehnt: number;
 };
 
-export type DelegatedStakesInfo = {
-  iot: {
-    stats: Stats;
-    total: Total;
-  };
-  mobile: {
-    stats: Stats;
-    total: Total;
-  };
-  network: {
-    stats: Stats;
-    total: Total;
-  };
+export type DelegatedStakesInfo = Record<
+  string,
+  { stats: Stats; total: Total }
+> & {
   timestamp: number;
 };
 
@@ -75,6 +66,10 @@ const useHeliumSolana = () => {
   const [epochs, setEpochs] = useState<epochInfo[]>([]);
   const [fetchingDelegateStakes, setFetchingDelegateStakes] = useState(false);
   const [delegatedStakes, setDelegatedStakes] = useState<Position[]>([]);
+  const [fetchingDelegateStakesInfo, setFetchingDelegateStakesInfo] =
+    useState(false);
+  const [delegatedStakesInfo, setDelegatedStakesInfo] =
+    useState<DelegatedStakesInfo>();
   const [currentTimestamp, setCurrentTimestamp] = useState<
     string | undefined
   >();
@@ -117,6 +112,9 @@ const useHeliumSolana = () => {
     const fetchedEpochs = await fetchEpochs();
     setEpochs(fetchedEpochs);
     setFetchingDelegateStakes(true);
+    const fetchedDelegatedStakesInfo = await fetchDelegatedStakesInfo();
+    setFetchingDelegateStakesInfo(false);
+    setDelegatedStakesInfo(fetchedDelegatedStakesInfo);
     const fetchedDelegatedStakes = await fetchDelegatedStakes();
     setFetchingDelegateStakes(false);
     setDelegatedStakes(fetchedDelegatedStakes);
@@ -131,6 +129,8 @@ const useHeliumSolana = () => {
     epochs,
     delegatedStakes,
     fetchingDelegateStakes,
+    delegatedStakesInfo,
+    fetchingDelegateStakesInfo,
   };
 };
 
