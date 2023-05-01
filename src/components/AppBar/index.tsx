@@ -41,6 +41,11 @@ function ResponsiveAppBar() {
         router.push("/calculator");
         return;
       }
+
+      if (innerText.toUpperCase() === "STATS") {
+        router.push("/");
+        return;
+      }
       // Open www.dewicats.com url with new tab
       window.open("https://www.dewicats.xyz/", "_blank");
       handleCloseNavMenu();
@@ -138,6 +143,9 @@ function ResponsiveAppBar() {
                   display: { xs: "block", md: "none" },
                 }}
               >
+                <MenuItem key={"stats"} onClick={handleNavMenuClick}>
+                  <Typography textAlign="center">{"Stats"}</Typography>
+                </MenuItem>
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleNavMenuClick}>
                     <Typography textAlign="center">{page}</Typography>
