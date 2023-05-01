@@ -338,8 +338,9 @@ export default function DonateDialog({ open, onClose }: DonateDialogProps) {
             textAlign: "center",
           }}
         >
-          We pour our heart and soul into this project. If you like what we are
-          doing, please consider donating to help us keep the lights on.
+          We meow with all our heart and purr with all our soul on this project.
+          If you love what we're doing, would you paw-lease consider donating to
+          help us keep the catnip flowing?
         </DialogContentText>
 
         <CustomSelect value={ticker} onChange={onSelectChange} />
