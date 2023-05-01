@@ -401,12 +401,6 @@ const RewardCalculator = () => {
     setYourVeHNTWithMult(`${totalAmountDepositedWithMult}`);
   }, [wallet, subDAO]);
 
-  useEffect(() => {
-    if (!subDAO) return;
-
-    setYourVeHNT(undefined);
-  }, [subDAO]);
-
   const handleCalculate = useCallback(async () => {
     if (!delegatedStakesInfo || !yourVeHNT) return;
     if (calculated) {
@@ -450,6 +444,7 @@ const RewardCalculator = () => {
       if (value.split(".")[1]?.length > 8) return;
 
       setYourVeHNT(value);
+      setYourVeHNTWithMult(value);
     },
     []
   );
@@ -457,6 +452,7 @@ const RewardCalculator = () => {
   const onSubDAOChanged = useCallback(
     (event: { target: { value: string } }) => {
       setYourVeHNT("");
+      setYourVeHNTWithMult("");
       setSubDAO(event.target.value);
     },
     []
