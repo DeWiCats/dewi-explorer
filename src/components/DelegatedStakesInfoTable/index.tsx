@@ -12,6 +12,10 @@ import { Box, CircularProgress } from "@mui/material";
 import useHeliumSolana, { Stats, Total } from "@/hooks/useHeliumSolana";
 import { toNumber } from "@helium/spl-utils";
 
+const secondsToDays = (seconds: number) => {
+  return seconds / 60 / 60 / 24;
+};
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -173,13 +177,13 @@ export default function DelegatedStakesInfoTable() {
                         {toNumber(BigInt(row.hnt), 8).toLocaleString()}
                       </StyledTableCell>
                       <StyledTableCell align="right">
-                        {row.fall_rate}
+                        {toNumber(BigInt(row.fall_rate), 8).toLocaleString()}
                       </StyledTableCell>
                       <StyledTableCell align="right">
                         {toNumber(BigInt(row.avg_hnt), 8).toLocaleString()}
                       </StyledTableCell>
                       <StyledTableCell align="right">
-                        {row.avg_lockup}
+                        {secondsToDays(row.avg_lockup).toLocaleString()}
                       </StyledTableCell>
                       <StyledTableCell align="right">
                         {toNumber(BigInt(row.avg_vehnt), 8).toLocaleString()}
@@ -188,7 +192,7 @@ export default function DelegatedStakesInfoTable() {
                         {toNumber(BigInt(row.median_hnt), 8).toLocaleString()}
                       </StyledTableCell>
                       <StyledTableCell align="right">
-                        {row.median_lockup}
+                        {secondsToDays(row.median_lockup).toLocaleString()}
                       </StyledTableCell>
                       <StyledTableCell align="right">
                         {toNumber(BigInt(row.median_vehnt), 8).toLocaleString()}

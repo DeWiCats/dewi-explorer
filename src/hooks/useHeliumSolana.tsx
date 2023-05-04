@@ -95,8 +95,9 @@ const useHeliumSolana = () => {
   const fetchDelegatedStakes = useCallback(async () => {
     const delegatedStakes = await axios("/api/delegatedStakes");
     const { data } = delegatedStakes;
+    console.log("data", data);
     setCurrentTimestamp(data.timestamp);
-    return data.positions;
+    return data.delegated_positions;
   }, []);
 
   const fetchMoreDelegatedStakes = useCallback(async () => {
